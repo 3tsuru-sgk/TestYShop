@@ -1,56 +1,128 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>リファラー判定 テストポータル</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 40px auto; padding: 20px; background-color: #f5f7f9; }
-        .card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        h1 { font-size: 20px; margin-bottom: 24px; color: #1a1a1a; border-left: 4px solid #004494; padding-left: 12px; }
-        p { font-size: 14px; color: #666; }
-        .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
-        .btn { display: block; padding: 12px 16px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; transition: all 0.2s; border: 1px solid #ddd; }
-        
-        /* 成功ルート */
-        .btn-primary { background-color: #004494; color: white; border-color: #004494; }
-        .btn-primary:hover { background-color: #003370; transform: translateY(-1px); }
-        
-        /* 失敗ルート */
-        .btn-outline { background-color: white; color: #666; }
-        .btn-outline:hover { background-color: #f9f9f9; color: #333; }
-        
-        .footer { margin-top: 32px; font-size: 12px; color: #999; text-align: center; }
-        code { background: #eee; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>リファラー判定 テストポータル</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 40px auto; padding: 20px; background-color: #f5f7f9; }
+    .card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    h1 { font-size: 20px; margin-bottom: 24px; color: #1a1a1a; border-left: 4px solid #004494; padding-left: 12px; }
+    p { font-size: 14px; color: #666; }
+    .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    .btn { display: block; padding: 12px 16px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; transition: all 0.2s; border: 1px solid #ddd; }
+    
+    /* 成功ルート */
+    .btn-primary { background-color: #004494; color: white; border-color: #004494; }
+    .btn-primary:hover { background-color: #003370; transform: translateY(-1px); }
+    .btn-success { background-color: #198754; color: white; border-color: #198754; }
+    .btn-success:hover { background-color: #157347; transform: translateY(-1px); }
+    
+    /* 失敗ルート */
+    .btn-outline { background-color: white; color: #666; }
+    .btn-outline:hover { background-color: #f9f9f9; color: #333; }
+    
+    .footer { margin-top: 32px; font-size: 12px; color: #999; text-align: center; }
+    code { background: #eee; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+
+
+
+    .test-case {
+        margin-bottom: 24px;
+        padding: 16px;
+        background-color: #fafbfc;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+    }
+
+    .test-label {
+        font-size: 12px;
+        font-weight: bold;
+        color: #004494;
+        margin-bottom: 4px;
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .test-desc {
+        font-size: 13px;
+        color: #555;
+        margin-bottom: 12px;
+        line-height: 1.4;
+    }
+
+    .btn {
+        display: block;
+        padding: 12px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        transition: all 0.2s;
+        border: 1px solid #ddd;
+        font-size: 14px;
+    }
+    
+    .btn-group { gap: 0px; } /* 間隔はセクション側で持つのでリセット */
+  </style>
 </head>
 <body>
 
 <div class="card">
-    <h1>リファラー検証ポータル</h1>
-    <p>Shopifyのアクセスコントロール機能をテストするための起点ページです。</p>
+  <h1>リファラー検証ポータル</h1>
+  <p>Shopifyのアクセスコントロール機能をテストするための起点ページです。</p>
+  <p>Shopifyでは<code>https://3tsuru-sgk.github.io/TestYShop/</code>を許可設定しているため、<br>
+  通常リファラーの<code>https://3tsuru-sgk.github.io/</code>ではアクセスに失敗します。
+  </p>
+  <p>一度Shopアクセスが成功した場合<strong>「タブを閉じるまで」有効</strong>です。</p>
 
-    <div class="btn-group">
-        <a href="https://yubikey-2.myshopify.com/" 
-           class="btn btn-outline">
-           【アクセス不可】ドメインのみ送信で遷移
-        </a>
+  <!-- 単純リファラーリンク -->
+  <div class="btn-group">
+    <span class="test-label">シナリオ１：失敗</span>
+    <div class="test-desc">リファラーポリシーなし：ドメイン情報のみを送信します。</div>
+    <a href="https://yubikey-2.myshopify.com/" 
+        class="btn btn-outline">
+        【アクセス不可】ドメインのみ送信で遷移
+    </a>
 
-        <a href="https://yubikey-2.myshopify.com/"
-           referrerpolicy="no-referrer-when-downgrade"
-           rel="opener"
-           class="btn btn-primary">
-           【アクセス許可】詳細リファラーを送信して遷移
-        </a>
+    <br>
+    <br>
+    <!-- 詳細リファラーリンク -->
+      <span class="test-label">シナリオ２：成功</span>
+    <div class="test-desc">フルパスのリファラーを強制的に送信します。</div>
+    <div class="test-desc">referrerpolicy="no-referrer-when-downgrade"</div>
+    <div class="test-desc">rel="opener"</div>
+    <a href="https://yubikey-2.myshopify.com/"
+        referrerpolicy="no-referrer-when-downgrade"
+        rel="opener"
+        class="btn btn-primary">
+        【アクセス許可】詳細リファラーを送信して遷移
+    </a>
 
-    </div>
+    <br>
+    <br>
+    <!-- パラメータリンク -->
+    <span class="test-label">シナリオ３：成功</span>
+    <div class="test-desc">リファラー隠ぺいブラウザ対策にパラメータ判定機能もいれています。（ON/OFF可能）</div>
+    <a href="https://yubikey-2.myshopify.com/?_vt=%3A17738136%21"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="btn btn-success">
+        【アクセス許可】詳細リファラーを送信して遷移
+    </a>
 
-    <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #eee;">
-        <p><strong>検証のヒント:</strong><br>
-        ・ドメイン間遷移の場合、通常リファラーはドメイン情報しか送信されません<br>
-        ・許可ページをドメインではなく、詳細URLにする場合は、遷移元でリファラーコントロールの設定が必須です。<br>
-        ・ブラウザのデベロッパーツール（F12）を開き、コンソールログで <code>Final Verdict</code> が <code>ALLOW</code> になるか確認してください。</p>
-    </div>
+  </div>
+
+  <!-- ヒント -->
+  <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #eee;">
+    <p><strong>検証のヒント:</strong><br>
+    ・ドメイン間遷移の場合、通常リファラーはドメイン情報しか送信されません<br>
+    ・許可ページをドメインではなく、詳細URLにする場合は、遷移元でリファラーポリシーの設定が必須です。<br>
+    <!--
+    ・ブラウザのデベロッパーツール（F12）を開き、コンソールログで <code>Final Verdict</code> が <code>ALLOW</code> になるか確認してください。
+    -->
+    </p>
+  </div>
 </div>
 
 <div class="footer">
