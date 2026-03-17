@@ -33,21 +33,24 @@
     <div class="btn-group">
         <a href="https://yubikey-2.myshopify.com/" 
            class="btn btn-outline">
-           【アクセス不可】ドメインのみ送信（制限にかかるか確認）
+           【アクセス不可】ドメインのみ送信で遷移
         </a>
 
-        <a href="https://yubikey-2.myshopify.com/" 
-           referrerpolicy="no-referrer-when-downgrade" 
+        <a href="https://yubikey-2.myshopify.com/"
+           referrerpolicy="no-referrer-when-downgrade"
+           target="_blank"
            rel="opener"
            class="btn btn-primary">
-           【アクセス許可】詳細リファラーを送信して入場
+           【アクセス許可】詳細リファラーを送信して遷移
         </a>
 
     </div>
 
     <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #eee;">
         <p><strong>検証のヒント:</strong><br>
-        ブラウザのデベロッパーツール（F12）を開き、コンソールログで <code>Final Verdict</code> が <code>ALLOW</code> になるか確認してください。</p>
+        ・ドメイン間遷移の場合、通常リファラーはドメイン情報しか送信されません<br>
+        ・許可ページをドメインではなく、詳細URLにする場合は、遷移元でリファラーコントロールの設定が必須です。<br>
+        ・ブラウザのデベロッパーツール（F12）を開き、コンソールログで <code>Final Verdict</code> が <code>ALLOW</code> になるか確認してください。</p>
     </div>
 </div>
 
