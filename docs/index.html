@@ -81,7 +81,7 @@
   <div class="btn-group">
     <span class="test-label">シナリオ１：失敗</span>
     <div class="test-desc">リファラーポリシーなし：ドメイン情報のみを送信します。</div>
-    <a href="https://yubikey-2.myshopify.com/" 
+    <a href="https://yubikey.yubion.com/" 
         class="btn btn-outline">
         【アクセス不可】ドメインのみ送信で遷移
     </a>
@@ -92,10 +92,10 @@
       <span class="test-label">シナリオ２：成功</span>
     <div class="test-desc">フルパスのリファラーを強制的に送信します。</div>
     <div class="test-desc">referrerpolicy="no-referrer-when-downgrade"</div>
-    <div class="test-desc">rel="opener"</div>
-    <a href="https://yubikey-2.myshopify.com/"
+    <div class="test-desc">target="_self"</div>
+    <a href="https://yubikey.yubion.com/"
         referrerpolicy="no-referrer-when-downgrade"
-        rel="opener"
+        target="_self"
         class="btn btn-primary">
         【アクセス許可】詳細リファラーを送信して遷移
     </a>
@@ -105,7 +105,7 @@
     <!-- パラメータリンク -->
     <span class="test-label">シナリオ３：補助対策（基本的に機能OFF）</span>
     <div class="test-desc">リファラー隠ぺいブラウザ対策にパラメータ判定機能もいれています。（基本的に機能はOFF）</div>
-    <a href="https://yubikey-2.myshopify.com/?_vt=%3A17738136%21"
+    <a href="https://yubikey.yubion.com/?_vt=%3A17738136%21"
         referrerpolicy="no-referrer-when-downgrade"
         class="btn btn-success">
         【アクセス許可】詳細リファラーを送信して遷移
