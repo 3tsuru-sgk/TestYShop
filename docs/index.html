@@ -2,9 +2,12 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="referrer" content="no-referrer-when-downgrade">
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- リファラーの送信ポリシーを指定する -->
+  <!--
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  -->
 
   <title>リファラー判定 テストポータル</title>
   <style>
@@ -134,16 +137,21 @@
 
 <script>
   /*** タイミング ***/
+  /**
   function timeOut() {
       var sec = 5; // デフォルト5秒
       setTimeout('timeUrl()', sec * 1000);
   }
+  */
+
 
   /*** リンク先へ遷移 ***/
+  /**
   function timeUrl() {
     location.href='https://yubikey.yubion.com/';
   }
   timeOut();
+  */
 </script>
 
 </body>
