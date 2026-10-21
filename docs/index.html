@@ -86,44 +86,56 @@
   <!-- 単純リファラーリンク -->
   <div class="btn-group">
     <span class="test-label">シナリオ１：失敗</span>
-    <div class="test-desc">リファラーポリシーなし：ドメイン情報のみを送信します。</div>
+    <div class="test-desc">リファラーポリシーなし：ドメイン情報のみまたは空</div>
     <a id="scenario1" href="https://yubikey.yubion.com/" 
         class="btn btn-outline">
-        【アクセス不可】ドメインのみ送信で遷移
+        １：【アクセス不可】ドメインのみ送信で遷移
     </a>
 
     <br>
     <br>
     <!-- 詳細リファラーリンク -->
-    <span class="test-label">シナリオ２：成功</span>
-    <div class="test-desc">フルパスのリファラーを強制的に送信します。</div>
+    <span class="test-label">シナリオ２：オリジン指定</span>
+    <div class="test-desc">referrerpolicy="origin-when-cross-origin"</div>
+    <a id="scenario2" href="https://yubikey.yubion.com/"
+        referrerpolicy="origin-when-cross-origin"
+        target="_self"
+        class="btn btn-success">
+        ２：origin-when-cross-origin
+    </a>
+
+    <br>
+    <br>
+    <!-- 詳細リファラーリンク -->
+    <span class="test-label">シナリオ３：フル指定</span>
     <div class="test-desc">referrerpolicy="no-referrer-when-downgrade"</div>
     <div class="test-desc">target="_self"</div>
-    <a id="scenario2" href="https://yubikey.yubion.com/"
+    <a id="scenario3" href="https://yubikey.yubion.com/"
         referrerpolicy="no-referrer-when-downgrade"
         target="_self"
         class="btn btn-primary">
-        【アクセス許可】詳細リファラーを送信して遷移
+        ３：no-referrer-when-downgrade
     </a>
+
 
     <br>
     <br>
     <!-- 詳細リファラーリンク -->
-    <span class="test-label">シナリオ３：成功（target指定なし）</span>
+    <span class="test-label">シナリオ４：unsafe-url</span>
     <div class="test-desc">フルパスのリファラーを強制的に送信します。</div>
-    <div class="test-desc">referrerpolicy="no-referrer-when-downgrade"</div>
-    <a id="scenario3" href="https://yubikey.yubion.com/"
-        referrerpolicy="no-referrer-when-downgrade"
+    <div class="test-desc">referrerpolicy="unsafe-url"</div>
+    <a id="scenario4" href="https://yubikey.yubion.com/"
+        referrerpolicy="unsafe-url"
         class="btn btn-success">
-        【アクセス許可】詳細リファラーを送信して遷移
+        ４：unsafe-url
     </a>
-
+  
     <br>
     <br>
     <!-- パラメータリンク -->
-    <span class="test-label">シナリオ４：補助対策（基本的に機能OFF）</span>
+    <span class="test-label">シナリオ９：補助対策（基本的に機能OFF）</span>
     <div class="test-desc">リファラー隠ぺいブラウザ対策にパラメータ判定機能もいれています。（基本的に機能はOFF）</div>
-    <a id="scenario4" href="https://yubikey.yubion.com/"
+    <a id="scenario9" href="https://yubikey.yubion.com/"
         referrerpolicy="no-referrer-when-downgrade"
         class="btn btn-success">
         【アクセス許可】詳細リファラーを送信して遷移
@@ -151,7 +163,7 @@
   /*** タイミング ***/
   function timeOut() {
       var sec = 5; // デフォルト5秒
-      setTimeout('timeUrl()', sec * 1000);
+      //setTimeout('timeUrl()', sec * 1000);
   }
 
 
